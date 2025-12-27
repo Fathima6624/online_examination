@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ subject.name }} - Exams</h2>
+
+{% for exam in exams %}
+    <div style="border:1px solid #ddd; padding:15px; margin-bottom:10px;">
+        <h4>{{ exam.title }}</h4>
+        <p>Duration: {{ exam.duration }} minutes</p>
+
+        <a href="{% url 'start_exam' exam.id %}" class="btn">
+            Start Exam
+        </a>
+    </div>
+{% empty %}
+    <p>No exams available for this subject.</p>
+{% endfor %}
+
+{% endblock %}

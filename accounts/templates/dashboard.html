@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Welcome, {{ request.user.username }} 👋</h3>
+<p>You are successfully logged in to the Online Examination System.</p>
+
+<hr>
+
+<!-- Search Exam Section -->
+<div style="margin: 20px 0; padding: 15px; background: #f7f7f7; border-radius: 8px;">
+    <h4>🔍 Find Exam Result</h4>
+    <form method="GET" action="{% url 'search_result' %}" style="display: flex; gap: 10px; max-width: 400px;">
+        <input 
+            type="text" 
+            name="code" 
+            placeholder="Enter Exam ID"
+            required
+            style="flex: 1; padding: 8px;"
+        >
+        <button type="submit" class="btn">Search</button>
+    </form>
+</div>
+
+<!-- Main Options -->
+<div style="display: flex; gap: 20px; margin-top: 20px;">
+    
+    <div style="flex: 1; padding: 20px; background: #f1f1f1; border-radius: 8px;">
+        <h4>📘 Available Exams</h4>
+        <p>View and attempt available exams.</p>
+        <a href="{% url 'subject_list' %}" class="btn">View Subjects</a>
+    </div>
+
+    <div style="flex: 1; padding: 20px; background: #f1f1f1; border-radius: 8px;">
+        <h4>📊 My Results</h4>
+        <p>Check your exam history and scores.</p>
+        <a href="{% url 'exam_result' %}" class="btn">View Results</a>
+    </div>
+
+</div>
+{% endblock %}

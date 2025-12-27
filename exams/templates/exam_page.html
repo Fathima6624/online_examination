@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>{{ exam.title }}</h2>
+
+<h3>Time Left: <span id="time">00:00</span></h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% for q in questions %}
+        <div style="margin-bottom:20px;">
+            <p><b>{{ forloop.counter }}. {{ q.question }}</b></p>
+
+            <label><input type="radio" name="{{ q.id }}" value="{{ q.option1 }}"> {{ q.option1 }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="{{ q.option2 }}"> {{ q.option2 }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="{{ q.option3 }}"> {{ q.option3 }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="{{ q.option4 }}"> {{ q.option4 }}</label><br>
+        </div>
+    {% endfor %}
+
+    <button type="submit">Submit Exam</button>
+</form>
+
+<script>
+    let totalSeconds = parseInt("{{ exam.duration }}") * 60;
+
+    function startTimer() {
+        const timerDisplay = document.getElementById("time");
+
+        const interval = setInterval(() => {
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+
+            timerDisplay.innerText =
+                minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+            if (totalSeconds <= 0) {
+                clearInterval(interval);
+                alert("Time is up! Submitting exam.");
+                document.querySelector("form").submit();
+            }
+
+            totalSeconds--;
+        }, 1000);
+    }
+
+    startTimer();
+</script>
+
+{% endblock %}

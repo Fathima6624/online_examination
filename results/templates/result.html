@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Exam Result</h2>
+
+<p><strong>Exam:</strong> {{ result.exam.title }}</p>
+<p><strong>Score:</strong> {{ result.score }} / {{ result.total }}</p>
+<p><strong>Exam ID:</strong> {{ result.exam_id }}</p>
+
+<a href="{% url 'dashboard' %}" class="btn">Back to Dashboard</a>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Select Subject</h2>
+
+{% for subject in subjects %}
+    <div style="margin-bottom: 15px;">
+        <h3>{{ subject.name }}</h3>
+        <a href="{% url 'exam_list' subject.id %}" class="btn">
+            View Exams
+        </a>
+    </div>
+{% empty %}
+    <p>No subjects available.</p>
+{% endfor %}
+
+{% endblock %}
